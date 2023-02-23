@@ -1,0 +1,21 @@
+body {
+    width: 70vw;
+    margin: auto;
+}
+
+header img {
+    width:100%;
+}
+
+main {
+    min-height: 70vh;
+}
+
+footer {
+    text-align: center;
+}
+
+footer div {
+    margin:0 8vw 0 0;
+}
+
