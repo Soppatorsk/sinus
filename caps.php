@@ -7,11 +7,11 @@
         <link rel="stylesheet" href="css/main.css">
     </head>
     <body>
-               <?php include 'header.php'; ?>
+        <?php include 'resource/header.php'; ?>
         <main>
             aa
             aa
 </main>
-        <?php include 'footer.php'; ?>
+        <?php include 'resource/footer.php'; ?>
 </body>
 
