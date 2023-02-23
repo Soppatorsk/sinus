@@ -1,5 +1,5 @@
 <?php 
-
+include 'ssLib.php';
 ?>
 <html>
     <head>
@@ -9,8 +9,10 @@
     <body>
         <?php include 'resource/header.php'; ?>
         <main>
-            aa
-            aa
+            <?php 
+            #getall();
+            print_r(queryToProducts()[2]);
+            ?>
 </main>
         <?php include 'resource/footer.php'; ?>
 </body>
