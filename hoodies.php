@@ -11,7 +11,7 @@ include 'ssLib.php';
         <main>
             <?php 
             #getall();
-            print_r(queryToProducts()[2]);
+            present(queryToProducts());
             ?>
 </main>
         <?php include 'resource/footer.php'; ?>

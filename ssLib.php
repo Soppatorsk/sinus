@@ -65,7 +65,7 @@ function queryToProducts() //TODO arguments to pass to query
     $out = array();
 
     $conn = ssDbConnect();
-    $sql = "SELECT * FROM products";
+    $sql = "SELECT * FROM products WHERE CategoryID='1'";
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {
@@ -80,8 +80,19 @@ function queryToProducts() //TODO arguments to pass to query
     }
     #print_r($out);
     $conn->close();
-    return $out;
-    #print_r($result);
+    return $out; //returns an array of Product objects
+}
+
+function present($array) {
+    foreach ($array as $p) {
+        echo    "<div class=box>".
+                "<img src=\"resource/products/hoodie-ash.png\"><br>".
+                $p->getCategory()." ".
+                $p->getSize()." ".
+                $p->getColour()." ".
+                $p->getPrice().
+                "</div>";
+    }
 }
 
 function getAll() //test
