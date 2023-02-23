@@ -9,8 +9,20 @@ header img {
 }
 
 main {
+    display: flex;
+    flex-wrap: wrap;
     min-height: 70vh;
 }
+
+.box {
+    width: 30%;
+}
+
+.box img { 
+    margin:auto;
+    height: 20vh;
+}
+
 
 footer {
     text-align: center;
