@@ -1,19 +1,27 @@
-<?php 
+<?php
 include 'ssLib.php';
+$p = $_GET['product'];
 ?>
 <html>
-    <head>
-        <Title>Sinus Skateshop</Title>
-        <link rel="stylesheet" href="css/main.css">
-    </head>
-    <body>
-        <?php include 'resource/header.php'; ?>
-        <main>
-            <?php 
-            #getall();
-            present(queryToProducts());
-            ?>
-</main>
-        <?php include 'resource/footer.php'; ?>
-</body>
 
+<head>
+    <Title>Sinus Skateshop</Title>
+    <link rel="stylesheet" href="css/main.css">
+    <script src="main.js"></script>
+</head>
+
+<body>
+    <?php include 'resource/header.php'; ?>
+    <main>
+        <?php
+        presentHighlight($p);
+        ?>
+        <div class="boxes">
+        <?php
+        #getall();
+        present(queryToProducts());
+        ?>
+        </div>
+    </main>
+    <?php include 'resource/footer.php'; ?>
+</body>

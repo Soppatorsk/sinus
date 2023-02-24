@@ -65,7 +65,7 @@ function queryToProducts() //TODO arguments to pass to query
     $out = array();
 
     $conn = ssDbConnect();
-    $sql = "SELECT * FROM products WHERE CategoryID='1'";
+    $sql = "SELECT * FROM products WHERE CategoryID='1' AND Size='Large'";
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {
@@ -83,52 +83,79 @@ function queryToProducts() //TODO arguments to pass to query
     return $out; //returns an array of Product objects
 }
 
-function present($array) {
+function getProduct($id) {
+    $conn = ssDbConnect();
+    $sql = "SELECT * From products WHERE ProductID='$id'";
+
+    $result = $conn->query($sql);
+    $result = $result->fetch_array();
+    return $result;
+}
+
+function present($array) { //show variants
+    
     foreach ($array as $p) {
-        echo    "<div class=box>".
-                "<img src=\"resource/products/hoodie-ash.png\"><br>".
-                $p->getCategory()." ".
-                $p->getSize()." ".
-                $p->getColour()." ".
-                $p->getPrice().
-                "</div>";
+        $id = $p->getId();
+        $col = $p->getColour();
+        $price = $p->getPrice();
+        
+        $imgPath = "resource/products/hoodie-ash.png"; //TODO NOT SET   
+
+        $cat = getCategoryVerbose($p->getCategory()); //TODO ass array bad EOT
+        $desc = $cat['Description'];
+        $title = $col." ".$cat['Name'];
+
+
+        echo <<<EOT
+        <a href="?product=$id">
+                <div class=box>
+                <h2>$title</h2>
+                <br>
+                <img src="$imgPath">
+                <br>
+                <p>$desc</p>
+                <p>$price</p>
+                </div>
+        </a>
+        EOT;
     }
 }
 
-function getAll() //test
+function presentHighlight($id) { //show selected item
+$p = getProduct($id);
+$cat = getCategoryVerbose($p[1])['Name'];
+$desc = getCategoryVerbose($p[1])['Description'];
+$imgPath = "resource/products/hoodie-fire.png";
+ echo <<<EOT
+        <div id="highlight">
+            <div class="left">
+                <h1>$p[2] $cat</h1>
+                <img src="$imgPath" alt="">
+                <p>$desc</p>
+            </div>
+            <div class="right">
+                <p>$p[4]</p>
+                <p>QUANTITY</p>
+                <form action="">
+                    <input type="number" name="" id="" value="1" min="1" max="99">
+                    <select name="" id="">
+                        <option value="Small">Small</option>
+                        <option value="Medium">Medium</option>
+                        <option value="Large">Large</option>
+                    </select>
+                    <input type="button" value="Add to cart">
+                </form>
+            </div>
+        </div>
+        EOT;
+}
 
-{
-    global $servername;
-    global $username;
-    global $password;
-    global $dbname;
+function getCategoryVerbose($category) {
+    $conn = ssDbConnect();
+    $sql = "SELECT * FROM Category where CategoryID='$category'";
 
-    $conn = new mysqli($servername, $username, $password, $dbname);
-    // Check connection
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
-
-    $sql = "SELECT * FROM products";
     $result = $conn->query($sql);
-
-    if ($result->num_rows > 0) {
-        echo "<table>";
-        // output data of each row
-        while ($row = $result->fetch_assoc()) {
-            echo "<tr>";
-            foreach ($row as $i) {
-                echo "<td>" .
-                    $i . "</td>";
-            }
-            echo "</tr>";
-        }
-        echo "</table>";
-    } else {
-        echo "0 results";
-    }
-    print_r($result);
-
-    $conn->close();
+    $result = $result->fetch_assoc();
+    return $result;
 }
 ?>

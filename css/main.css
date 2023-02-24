@@ -11,21 +11,44 @@ header img {
     max-height: 10vh;
 }
 
-main {
+#highlight {
+    display: flex;
+}
+
+#highlight img {
+    width:40vh;
+}
+
+#highlight .left {
+    float:left;
+    padding:0 15%;
+}
+
+#highlight .right {
+    float:right;
+}
+
+.boxes {
     display: flex;
     flex-wrap: wrap;
-    min-height: 70vh;
+}
+
+a {
+    text-decoration: none;
+    color:black;
 }
 
 .box {
-    width: 30%;
+    margin:2vh;
 }
 
 .box img { 
-    margin:auto;
     height: 20vh;
 }
 
+span {
+    display: none;
+}
 
 footer {
     text-align: center;
