@@ -12,31 +12,31 @@
     <?php include 'resource/header.php'; ?>
     <main>
         <div class="box">
-            <a href="hoodies.php?product=1">
+            <a href="shop.php?product=1">
                 <h2>Hoodies</h2>
                 <img src="resource/products/hoodie-ash.png" alt="">
             </a>
         </div>
         <div class="box">
-            <a href="tshirts.php">
+            <a href="shop.php?product=1">
             <h2>T-shirts</h2>
             <img src="resource/products/sinus-tshirt-blue.png" alt="">
             </a>
         </div>
         <div class="box">
-            <a href="caps.php">
+            <a href="shop.php?product=1">
             <h2>Caps</h2>
             <img src="resource/products/sinus-cap-red.png" alt="">
             </a>
         </div>
         <div class="box">
-            <a href="skateboards.php">
+            <a href="shop.php?product=1">
             <h2>Skateboards</h2>
             <img src="resource/products/sinus-skateboard-gretasfury.png" alt="">
             </a>
         </div>
         <div class="box">
-            <a href="wheels.php">
+            <a href="shop.php?product=1">
             <h2>Wheels</h2>
             <img src="resource/products/sinus-wheel-wave.png" alt="">
             </a>

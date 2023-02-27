@@ -64,7 +64,6 @@ function queryToProducts() //TODO arguments to pass to query
 
 {
     $out = array();
-
     $conn = ssDbConnect();
     $sql = "SELECT * FROM products";
     $result = $conn->query($sql);
@@ -84,7 +83,7 @@ function queryToProducts() //TODO arguments to pass to query
     return $out; //returns an array of Product objects
 }
 
-function getProduct($id)
+function getProduct($id) //TODO unify database calls, multiple calls for same product? stupid
 {
     $conn = ssDbConnect();
     $sql = "SELECT * From products WHERE ProductID='$id'";
@@ -119,7 +118,7 @@ function present($array)
         $imgPath = "resource/products/".getProductImage($id)[0]['url'];
         $cat = getCategoryVerbose($p->getCategory()); //TODO ass array bad EOT
         $desc = $cat['Description'];
-        $title = $col . " " . $cat['Name'];
+        $title = $col . " " . $cat['Name']." (".$p->getSize().")"; //TODO if not clothing, no ()
 
 
         echo <<<EOT
@@ -143,24 +142,21 @@ function presentHighlight($id)
     $cat = getCategoryVerbose($p[1])['Name'];
     $desc = getCategoryVerbose($p[1])['Description'];
     $imgPath = "resource/products/".getProductImage($id)[0]['url'];
+    $title = $p[2]." ".$cat." (".$p[3].")";
     echo <<<EOT
         <div id="highlight">
             <div class="left">
-                <h1>$p[2] $cat</h1>
+                <h1>$title</h1>
                 <img src="$imgPath" alt="">
                 <p>$desc</p>
             </div>
             <div class="right">
                 <p>$p[4]</p>
                 <p>QUANTITY</p>
-                <form action="">
-                    <input type="number" name="" id="" value="1" min="1" max="99">
-                    <select name="" id="">
-                        <option value="Small">Small</option>
-                        <option value="Medium">Medium</option>
-                        <option value="Large">Large</option>
-                    </select>
-                    <input type="button" value="Add to cart">
+                <form action="addToCart.php">
+                    <input type="hidden" name="product" value="$id">
+                    <input type="number" name="quantity" id="" value="1" min="1" max="99">
+                    <input type="submit">
                 </form>
             </div>
         </div>
@@ -176,4 +172,31 @@ function getCategoryVerbose($category)
     $result = $result->fetch_assoc();
     return $result;
 }
+
+function addToCart($id, $q) { //TODO make objects instead?
+    $arr = cDeserialize();
+    $new = array($id, $q);
+    $found = false;
+    for ($i = 0; $i<count($arr); $i++) {
+        if($arr[$i][0] == $id) {
+            $arr[$i][1] += $q; //productid already in array, append
+            $found = true;
+        }
+    }
+    if (!$found) array_push($arr, $new);
+    cSerialize($arr);
+    } 
+
+function cSerialize($arr) {
+    setCookie("cart", serialize($arr), time()+3600);
+}
+
+function cDeserialize() {
+    if (isset($_COOKIE['cart'])) { 
+        return unserialize($_COOKIE['cart']);
+    }
+    return array();
+}
+
+
 ?>
