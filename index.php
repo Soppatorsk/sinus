@@ -12,7 +12,7 @@
     <?php include 'resource/header.php'; ?>
     <main>
         <div class="box">
-            <a href="hoodies.php">
+            <a href="hoodies.php?product=1">
                 <h2>Hoodies</h2>
                 <img src="resource/products/hoodie-ash.png" alt="">
             </a>

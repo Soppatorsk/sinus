@@ -14,6 +14,7 @@ $p = $_GET['product'];
     <?php include 'resource/header.php'; ?>
     <main>
         <?php
+        print_r(getProductImage($p));
         presentHighlight($p);
         ?>
         <div class="boxes">

@@ -61,11 +61,12 @@ function ssDbConnect()
 }
 
 function queryToProducts() //TODO arguments to pass to query
+
 {
     $out = array();
 
     $conn = ssDbConnect();
-    $sql = "SELECT * FROM products WHERE CategoryID='1' AND Size='Large'";
+    $sql = "SELECT * FROM products";
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {
@@ -83,7 +84,8 @@ function queryToProducts() //TODO arguments to pass to query
     return $out; //returns an array of Product objects
 }
 
-function getProduct($id) {
+function getProduct($id)
+{
     $conn = ssDbConnect();
     $sql = "SELECT * From products WHERE ProductID='$id'";
 
@@ -92,18 +94,32 @@ function getProduct($id) {
     return $result;
 }
 
-function present($array) { //show variants
+function getProductImage($id)
+{
+    $conn = ssDbConnect();
+    $sql = "SELECT * From productimages WHERE id='$id'";
+    $out = array();
+
+    $result = $conn->query($sql);
+    while ($row = $result->fetch_assoc()) {
+        array_push($out, $row);
+    }
     
+    return $out;
+}
+
+function present($array)
+{ //show variants
+
     foreach ($array as $p) {
         $id = $p->getId();
         $col = $p->getColour();
         $price = $p->getPrice();
-        
-        $imgPath = "resource/products/hoodie-ash.png"; //TODO NOT SET   
 
+        $imgPath = "resource/products/".getProductImage($id)[0]['url'];
         $cat = getCategoryVerbose($p->getCategory()); //TODO ass array bad EOT
         $desc = $cat['Description'];
-        $title = $col." ".$cat['Name'];
+        $title = $col . " " . $cat['Name'];
 
 
         echo <<<EOT
@@ -121,12 +137,13 @@ function present($array) { //show variants
     }
 }
 
-function presentHighlight($id) { //show selected item
-$p = getProduct($id);
-$cat = getCategoryVerbose($p[1])['Name'];
-$desc = getCategoryVerbose($p[1])['Description'];
-$imgPath = "resource/products/hoodie-fire.png";
- echo <<<EOT
+function presentHighlight($id)
+{ //show selected item
+    $p = getProduct($id);
+    $cat = getCategoryVerbose($p[1])['Name'];
+    $desc = getCategoryVerbose($p[1])['Description'];
+    $imgPath = "resource/products/".getProductImage($id)[0]['url'];
+    echo <<<EOT
         <div id="highlight">
             <div class="left">
                 <h1>$p[2] $cat</h1>
@@ -150,7 +167,8 @@ $imgPath = "resource/products/hoodie-fire.png";
         EOT;
 }
 
-function getCategoryVerbose($category) {
+function getCategoryVerbose($category)
+{
     $conn = ssDbConnect();
     $sql = "SELECT * FROM Category where CategoryID='$category'";
 
