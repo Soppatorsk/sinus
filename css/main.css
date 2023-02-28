@@ -58,3 +58,109 @@ footer div {
     margin:0 8vw 0 0;
 }
 
+/* Erik har gjort detta */
+.cartHeader
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+}
+
+.cartHeader img
+{
+    height: 50%;
+    width: 50%;
+}
+
+.cart
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+table
+{
+    /*display: flex;
+    flex-direction: column;*/
+    width: 64vw;
+    /*height: 50vh;*/
+}
+
+th, td 
+{
+    border:1px solid black;  
+}
+/* tr
+{
+    display: flex;
+    flex-direction: row;
+
+} */
+th
+{
+    height: 3vh;
+}
+
+td
+{
+    height: 5vh;
+}
+
+.cartProduct
+{
+    flex: 1;
+    justify-self: space-around;
+    align-self: center;
+}
+
+
+.quantity
+{
+    flex: 1;
+    justify-self: space-around;
+    align-self: center;
+}
+
+.price
+{
+    flex: 1;
+    justify-self: space-around;
+    align-self: center;
+}
+
+.delite
+{
+    flex: 1;
+    justify-self: space-around;
+    align-self: center;
+}
+
+.total
+{
+color: black;
+}
+
+button.checkOut
+{
+    background-color: aquamarine;
+    color: blueviolet;
+    justify-self: flex-start;
+    width: 7vw;
+    height: 3vw;
+}
+
+label
+{
+    background-color: aqua;
+}
+
+.adress
+{
+    margin: 2em;
+}
+
+.customer
+{
+    gap: 2;
+}
