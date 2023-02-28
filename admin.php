@@ -19,9 +19,9 @@
         <main>
         <?php
 // Connect to the database
-include 'ssLib.php';
-queryToProducts();
-
+require_once './ssLib.php';
+require_once './classes/connection.php';
+$conn = connection::conn();
 // Check if a form has been submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Get the submitted form data
