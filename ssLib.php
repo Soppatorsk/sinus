@@ -65,7 +65,10 @@ function queryToProducts($category, $size, $color) //TODO arguments to pass to q
 {
     $out = array();
     $conn = ssDbConnect();
-    $sql = "SELECT * FROM products WHERE CategoryID=$category ";
+    $sql = "SELECT * FROM products WHERE 1 ";
+    if ($category != "") {
+        $sql .= "AND CategoryID='$category' ";
+    }
     if ($size != "") {
         $sql .= "AND Size='$size' ";
     }

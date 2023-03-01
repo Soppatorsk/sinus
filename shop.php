@@ -45,7 +45,9 @@ if (isset($_GET['product'])) $highlight = $_GET['product'];
     <main>
         <div class=controls>
             <form action="shop.php" method="post">
+                <input type="text" name="searchTerm">
                 <select name="category" id=""> <!-- TODO hide on non clothing -->
+                    <option value="">All</option>
                     <option value="1">Hoodies</option>
                     <option value="2">Caps</option>
                     <option value="3">T-shirts</option>

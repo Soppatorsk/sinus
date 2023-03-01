@@ -19,6 +19,11 @@ footer {
     margin: 0 5vh 5vh 0 ;
 }
 
+a {
+    text-decoration: none;
+    color:black;
+}
+
 
 /* Erik har gjort detta */
 .cartHeader
