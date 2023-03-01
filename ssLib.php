@@ -123,7 +123,7 @@ function present($array)
     foreach ($array as $p) {
         $id = $p->getId();
         $col = $p->getColour();
-        if ($p->getCategory() < 3) $size = "(".$p->getSize().")"; else $size = "";
+        if ($p->getCategory() < 4) $size = "(".$p->getSize().")"; else $size = "";
         $price = $p->getPrice();
 
         $imgPath = "resource/products/" . getProductImage($id)[0];
@@ -135,12 +135,12 @@ function present($array)
         echo <<<EOT
         <a href="?product=$id">
                 <div class=box>
-                <h2>$title</h2>
+                <h2></h2>
                 <br>
                 <img src="$imgPath">
                 <br>
-                <p>$desc $size</p>
-                <p>$price</p>
+                <p></p>
+                <p>$price:-</p>
                 </div>
         </a>
         EOT;
@@ -157,6 +157,7 @@ function presentHighlight($id) //TODO this is a mess
     $imgPath = "resource/products/".getProductImage($id)[0];
     $desc = $cat['Description']." (".$p->getSize().")";
     $price = $p->getPrice();
+
     echo <<<EOT
         <div id="highlight">
             <div class="left">
@@ -165,12 +166,12 @@ function presentHighlight($id) //TODO this is a mess
                 <p>$desc</p>
             </div>
             <div class="right">
-                <p>$price</p>
-                <p>QUANTITY</p>
+                <p>$price SEK</p>
+                <p>Add to cart:</p>
                 <form action="addToCart.php">
-                    <input type="hidden" name="product" value="$id">
-                    <input type="number" name="quantity" id="" value="1" min="1" max="99">
-                    <input type="submit">
+                <input type="hidden" name="product" value="$id">
+                <input type="number" name="quantity" id="" value="1" min="1" max="99">
+                    <input type="submit" value="Place in cart">
                 </form>
             </div>
         </div>

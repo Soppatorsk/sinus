@@ -1,0 +1,50 @@
+
+main {
+    min-height: 60vh;
+}
+
+#highlight {
+    display: flex;
+    justify-content: space-around;
+    margin: 0 10vw;
+}
+
+#highlight img {
+    max-width:30vh;
+    max-height:25vh;
+}
+
+#highlight .left {
+    float:left;
+    padding:0 15%;
+}
+
+#highlight .right {
+    float:right;
+}
+
+.right * {
+    display: flex;
+}
+
+.boxes {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+a {
+    text-decoration: none;
+    color:black;
+}
+
+.box {
+    margin:2vh;
+}
+
+.box img { 
+    height: 20vh;
+}
+
+span {
+    display: none;
+}

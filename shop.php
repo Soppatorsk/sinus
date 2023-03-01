@@ -2,34 +2,41 @@
 include 'ssLib.php';
 
 session_start();
-
+//TODO this is a big mess
 if (isset($_POST['new'])) { //Search press
-    if (isset($_POST['category'])) {
-        $ca = $_POST['category'];
-    } else $ca = "1";
-    if (isset($_POST['size'])) $s = $_POST['size']; else $s=""; //TODO ? operands
+    if (isset($_POST['category'])) $ca = $_POST['category']; else $ca = "1"; //TODO ? operands
+    if (isset($_POST['size'])) $s = $_POST['size']; else $s=""; 
     if (isset($_POST['color'])) $co = $_POST['color']; else $co="";
+
     $products = queryToProducts($ca, $s, $co);
-    
-    $_SESSION['Filter'] = array($ca, $s, $co);
+    if (!$products) { //if No results
+        header('Location: shop.php?err=No%20Results');
+        $products = queryToProducts("1", "", "");
+    } else {
+        $highlight=$products[0]->getId();
+        $_SESSION['Filter'] = array($ca, $s, $co);
+    } 
 } else { //Item click or enter page
     if (isset($_SESSION['Filter'])) {
         $old = $_SESSION['Filter'];
         $products = queryToProducts($old[0], $old[1], $old[2]);
+        $highlight=$products[0]->getId();
     } else {
         $_SESSION['Filter'] = array("1", "", "");
         $products = queryToProducts("1", "", "");
+        $highlight=$products[0]->getId();
+
     }
 }
-$p = $products[0];
 
-if (isset($_GET['product'])) $highlight = $_GET['product']; else $highlight=$p->getId();
+if (isset($_GET['product'])) $highlight = $_GET['product']; 
 
 ?>
 <html>
 <head>
     <Title>Sinus Skateshop</Title>
     <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/shop.css">
     <script src="main.js"></script>
 </head>
 
@@ -37,7 +44,7 @@ if (isset($_GET['product'])) $highlight = $_GET['product']; else $highlight=$p->
     <?php include 'resource/header.php'; ?>
     <main>
         <div class=controls>
-            <form action="" method="post">
+            <form action="shop.php" method="post">
                 <select name="category" id=""> <!-- TODO hide on non clothing -->
                     <option value="1">Hoodies</option>
                     <option value="2">Caps</option>
@@ -65,11 +72,12 @@ if (isset($_GET['product'])) $highlight = $_GET['product']; else $highlight=$p->
             </form>
         </div>
         <?php
-        presentHighlight($highlight);
-        ?>
-        <div class="boxes">
-            <?php
+        if (!isset($_GET['err'])) {
+            presentHighlight($highlight);
+            echo "<h2>Other search results:</h2>";
+            echo "<div class=\"boxes\">";
             present($products);
+        } else echo $_GET['err'];
             ?>
         </div>
     </main>
