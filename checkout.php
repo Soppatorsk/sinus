@@ -1,9 +1,9 @@
 <?php 
 
-require_once 'classes/connection.php';
-require_once 'classes/product.php';
-require_once 'classes/order.php';
-require_once 'classes/querys.php';
+require_once 'ssLib.php';
+
+
+;
 ?>
 <html>
     <head>
@@ -27,7 +27,7 @@ require_once 'classes/querys.php';
             
             //$get = Querys::checkOut();
 
-            $products = unserialize($_COOKIE['toOrder']);
+            $products = cDeserialize();
 
             echo '<pre>';
             var_dump($products);

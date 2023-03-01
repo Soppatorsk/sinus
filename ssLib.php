@@ -198,5 +198,29 @@ function cDeserialize() {
     return array();
 }
 
+function checkEmail($eMail)
+{
+
+    $conn = ssDbConnect();
+
+    $stmt = $conn->prepare("SELECT count(CustomerID) FROM `customers` WHERE Email = (?);");
+    $stmt->bind_param("s", $eMail);
+
+     // set parameters and execute
+     $eMail = $eMail;
+     $stmt->execute();
+ 
+     $result = $stmt->get_result();
+ 
+     if ($result->num_rows > 0)
+     {
+             
+         while ($row = $result->fetch_assoc())
+         {
+            return $row['count(CustomerID)'];
+         }
+    }
+
+}
 
 ?>
