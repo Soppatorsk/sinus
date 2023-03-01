@@ -157,15 +157,22 @@ function presentHighlight($id) //TODO this is a mess
     $cat = getCategoryVerbose($p->getCategory());
     $catName = $cat['Name'];
     $title = $p->getColour()." ".$catName;
-    $imgPath = "resource/products/".getProductImage($id)[0];
     $desc = $cat['Description']." (".$p->getSize().")";
     $price = $p->getPrice();
+    
+    $imgs = getProductImage($id);
+    if (count($imgs) > 1) {
+            $imgView = "<div><img id=\"image1\"></div>";
+    } else {
+        $imgView = "<img src=\"resource/products/".$imgs[0]."\">";
+    }
+
 
     echo <<<EOT
         <div id="highlight">
             <div class="left">
                 <h1>$title</h1>
-                <img src="$imgPath" alt="">
+                $imgView
                 <p>$desc</p>
             </div>
             <div class="right">

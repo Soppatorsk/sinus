@@ -61,5 +61,7 @@ insert into productimages VALUES
 ("52", "sinus-skateboard-eagle.png"),
 ("53", "sinus-skateboard-fire.png"),
 ("54", "sinus-skateboard-yellow.png"),
-("55", "sinus-skateboard-gretasfury.png")
-
+("55", "sinus-skateboard-gretasfury.png"),
+("1", "juholt.png"),
+("1", "evilKermit.jpg"),
+("27", "trumpRedCap.png")

@@ -29,7 +29,8 @@ if (isset($_POST['new'])) { //Search press
     }
 }
 
-if (isset($_GET['product'])) $highlight = $_GET['product']; 
+if (isset($_GET['product'])) $highlight = $_GET['product'];
+$slider = getProductImage($highlight);
 
 ?>
 <html>
@@ -80,8 +81,28 @@ if (isset($_GET['product'])) $highlight = $_GET['product'];
             echo "<div class=\"boxes\">";
             present($products);
         } else echo $_GET['err'];
-            ?>
+        ?>
         </div>
     </main>
     <?php include 'resource/footer.php'; ?>
+        <script>
+        var imgArray = [
+            <?php
+            foreach ($slider as $img) {
+                echo "'resource/products/".$img."',";
+            } 
+                ?>
+        ];
+        var curIndex = 0;
+        var imgDuration = 3000;
+    
+        function slideShow() {
+            document.getElementById('image1').src = imgArray[curIndex];
+            curIndex++;
+            if (curIndex == imgArray.length) { curIndex = 0; }
+            setTimeout("slideShow()", imgDuration);
+        }
+        slideShow();
+    </script>
 </body>
+</html>
