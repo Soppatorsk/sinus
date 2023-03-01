@@ -1,27 +1,36 @@
-<?php 
-
-?>
-<html>
-    <head>
-        <Title>Sinus Skateshop</Title>
-        <form method="post" action="<?php echo $_SERVER['PHP_SELF'];?>">
-  Products: <input type="text" name="product_id">
-  Product name:<input type="text" name="product_name">
-  Product price:<input type="text" name="product_price">
-  Product size:<input type="text" name="product_size">
-  Product category:<input type="text" name="product_category">
-        <input type="submit">
-        </form>
-        <link rel="stylesheet" href="css/main.css">
-    </head>
-    <body>
-        <?php include 'resource/header.php'; ?>
-        <main>
-        <?php
+<?php
 // Connect to the database
-require_once './ssLib.php';
-require_once './classes/connection.php';
-$conn = connection::conn();
+// Define MySQL database credentials
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "sinus_skate";
+
+// Create MySQL connection
+$conn = mysqli_connect($servername, $username, $password, $dbname);
+
+// Check if the connection was successful
+if (!$conn) {
+    die("Connection failed: " . mysqli_connect_error());
+}
+
+echo "Connected successfully";
+// Retrieve information about products
+$sql = "SELECT * FROM products";
+$result = mysqli_query($conn, $sql);
+
+if (mysqli_num_rows($result) > 0) {
+    // Create an array to store the products
+    $products = array();
+
+    // Fill in the products array with information from the database
+    while ($row = mysqli_fetch_assoc($result)) {
+        $products[] = $row;
+    }
+} else {
+    echo "No products found.";
+}
+
 // Check if a form has been submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Get the submitted form data
@@ -42,22 +51,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 
-// Retrieve information about products
-$sql = "SELECT * FROM products";
-$result = mysqli_query($conn, $sql);
-
-if (mysqli_num_rows($result) > 0) {
-    // Create an array to store the products
-    $products = array();
-
-    // Fill in the products array with information from the database
-    while ($row = mysqli_fetch_assoc($result)) {
-        $products[] = $row;
-    }
-} else {
-    echo "No products found.";
-}
-
 // Close the database connection
 mysqli_close($conn);
 ?>
@@ -69,6 +62,7 @@ mysqli_close($conn);
 <body>
     <h1>Product Administration</h1>
     <table>
+        
         <tr>
             <th>ID</th>
             <th>Name</th>
@@ -78,22 +72,23 @@ mysqli_close($conn);
             <th>Action</th>
         </tr>
         <?php foreach ($products as $product): ?>
-        <tr>
             <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
-                <td><?php echo $product["id"]; ?></td>
-                <td><input type="text" name="product_name" value="<?php echo $product["name"]; ?>"></td>
-                <td><input type="number" name="product_price" value="<?php echo $product["price"]; ?>"></td>
-                <td><input type="text" name="product_size" value="<?php echo $product["size"]; ?>"></td>
-                <td><input type="text" name="product_category" value="<?php echo $product["category"]; ?>"></td>
-                <input type="hidden" name="product_id" value="<?php echo $product["id"]; ?>">
-                <td><input type="submit" value="Update"></td>
+        <tr>
+            <td><?php echo $product["id"]; ?></td>
+            <td><input type="text" name="product_name" value="<?php echo $product["name"]; ?>"></td>
+            <td><input type="number" name="product_price" value="<?php echo $product["price"]; ?>"></td>
+            <td><input type="text" name="product_size" value="<?php echo $product["size"]; ?>"></td>
+            <td><input type="text" name="product_category" value="<?php echo $product["category"]; ?>"></td>
+            <input type="hidden" name="product_id" value="<?php echo $product["id"]; ?>">
+            <td><input type="submit" value="Update"></td>
+            </tr>
             </form>
-        </tr>
         <?php endforeach; ?>
+        
+        
     </table>
+    <main>
+    <?php include 'resource/footer.php'; ?>
+    </main>
 </body>
 </html>
-
-</main>
-        <?php include 'resource/footer.php'; ?>
-</body>
