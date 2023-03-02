@@ -25,7 +25,7 @@ if ($result) {
         }
         echo "</table>";
     } else {
-        echo "No orders found.";
+        echo "<pre>No orders found.</pre>\n";
     }
 } else {
     echo "Error retrieving orders: " . mysqli_error($conn);
@@ -66,7 +66,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["customer_id"])) {
             }
             echo "</table>";
         } else {
-            echo "No orders found for customer #$customer_id.";
+            echo "<pre>No orders found for customer #$customer_id.</pre>\n";
         }
     } else {
         echo "Error retrieving order history: " . mysqli_error($conn);
