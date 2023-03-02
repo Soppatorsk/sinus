@@ -80,6 +80,7 @@ mysqli_close($conn);
 </head>
 <body>
     <h1>Order History Lookup</h1>
+    <a href="admin.php">Take me back to the admin page!</a>
     <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
         <label for="customer_id">Customer ID:</label>
         <input type="text" id="customer_id" name="customer_id" value="<?php echo $customer_id; ?>">
