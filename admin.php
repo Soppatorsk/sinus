@@ -16,42 +16,43 @@ if (!$conn) {
 
 // Check if a form has been submitted for updating a product
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Get the submitted form data
-    $product_id = $_POST["ProductID"];
-    $product_colour = $_POST["Colour"];
-    $product_size = $_POST["Size"];
-    $product_price = $_POST["Price"];
-    $product_category = $_POST["CategoryID"];
+  // Get the submitted form data
+  $product_id = isset($_POST["ProductID"]) ? $_POST["ProductID"] : "";
+  $product_colour = isset($_POST["Colour"]) ? $_POST["Colour"] : "";
+  $product_size = isset($_POST["Size"]) ? $_POST["Size"] : "";
+  $product_price = isset($_POST["Price"]) ? $_POST["Price"] : "";
+  $product_category = isset($_POST["CategoryID"]) ? $_POST["CategoryID"] : "";
 
-    // Update the product information in the database
-    $sql = "UPDATE products SET Colour='$product_colour', Size='$product_size', Price='$product_price', CategoryID='$product_category' WHERE ProductID='$product_id'";
-    $result = mysqli_query($conn, $sql);
+  // Update the product information in the database
+  $sql = "UPDATE products SET Colour='$product_colour', Size='$product_size', Price='$product_price', CategoryID='$product_category' WHERE ProductID='$product_id'";
+  $result = mysqli_query($conn, $sql);
 
-    if ($result) {
-        echo "Product information updated successfully.";
-    } else {
-        echo "Error updating product information: " . mysqli_error($conn);
-    }
+  if ($result) {
+      echo "Product information updated successfully.";
+  } else {
+      echo "Error updating product information: " . mysqli_error($conn);
+  }
 }
 
+
 // Check if a form has been submitted for adding a new product
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["add_product"])) {
-    // Get the submitted form data
-    $product_id = $_POST["ProductID"];
-    $product_colour = $_POST["Colour"];
-    $product_size = $_POST["Size"];
-    $product_price = $_POST["Price"];
-    $product_category = $_POST["CategoryID"];
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["new_product_id"]) && isset($_POST["new_colour"]) && isset($_POST["new_size"]) && isset($_POST["new_price"]) && isset($_POST["new_category_id"])) {
+  // Get the submitted form data
+  $product_id = $_POST["new_product_id"];
+  $product_colour = $_POST["new_colour"];
+  $product_size = $_POST["new_size"];
+  $product_price = $_POST["new_price"];
+  $product_category = $_POST["new_category_id"];
 
-    // Insert the new product information into the database
-    $sql = "INSERT INTO products (ProductID, Colour, Size, Price, CategoryID) VALUES ('$product_id', '$product_colour', '$product_size', '$product_price', '$product_category')";
-    $result = mysqli_query($conn, $sql);
+  // Insert the new product information into the database
+  $sql = "INSERT INTO products (ProductID, Colour, Size, Price, CategoryID) VALUES ('$product_id', '$product_colour', '$product_size', '$product_price', '$product_category')";
+  $result = mysqli_query($conn, $sql);
 
-    if ($result) {
-        echo "New product added successfully.";
-    } else {
-        echo "Error adding new product: " . mysqli_error($conn);
-    }
+  if ($result) {
+      echo "New product added successfully.";
+  } else {
+      echo "Error adding new product: " . mysqli_error($conn);
+  }
 }
 
 // Retrieve information about products
@@ -135,25 +136,4 @@ mysqli_close($conn);
         </table>
     </form>
 
-    <?php
-    // Check if a new product has been submitted
-    if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["new_product_id"]) && isset($_POST["new_colour"]) && isset($_POST["new_size"]) && isset($_POST["new_price"]) && isset($_POST["new_category_id"])) {
-        // Get the submitted form data
-        $new_product_id = $_POST["new_product_id"];
-        $new_colour = $_POST["new_colour"];
-        $new_size = $_POST["new_size"];
-        $new_price = $_POST["new_price"];
-        $new_category_id = $_POST["new_category_id"];
-
-        // Add the new product to the database
-        $sql = "INSERT INTO products (ProductID, Colour, Size, Price, CategoryID) VALUES ('$new_product_id', '$new_colour', '$new_size', '$new_price', '$new_category_id')";
-        $result = mysqli_query($conn, $sql);
-
-        if ($result) {
-            echo "New product added successfully.";
-        } else {
-            echo "Error adding new product: " . mysqli_error($conn);
-        }
-    }
-?>
 
