@@ -279,7 +279,7 @@ function getEURRate() {
  $curl = curl_init();
 
     curl_setopt_array($curl, array(
-      CURLOPT_URL => "https://api.apilayer.com/exchangerates_data/convert?to=EUR&from=SEK&amount=$i",
+      CURLOPT_URL => "https://api.apilayer.com/exchangerates_data/convert?to=EUR&from=SEK&amount=1",
       CURLOPT_HTTPHEADER => array(
         "Content-Type: text/plain",
         "apikey: r2hVGYn5mbu0h55tRMTX2TfY5ZJwMdR6"
