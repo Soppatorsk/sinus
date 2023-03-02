@@ -242,6 +242,11 @@ function cDeserialize()
     return array();
 }
 
+function killCookie($arr)
+{
+setCookie("cart", serialize($arr), time() - 3600);
+}
+
 function checkEmail($eMail)
 {
 

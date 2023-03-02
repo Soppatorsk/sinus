@@ -273,6 +273,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 
     $conn->close();
     }
+    killCookie($arr);
     header('location: ./orderSent.php');
 
 }

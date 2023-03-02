@@ -57,6 +57,7 @@ mysqli_close($conn);
 <html>
 <head>
     <title>Product Administration</title>
+    <a href="shop.php">Take me back to the shop!</a>
 </head>
 <body>
     <h1>Product Administration</h1>
