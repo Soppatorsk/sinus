@@ -1,13 +1,11 @@
 <html>
     <head>
         <Title>Sinus Skateshop</Title>
-        <link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" href="css/cart_chekout.css">
     </head>
     <body>
         <header Class="cartHeader">
             <img src="resource/logo/header-logo.png" alt="Sinus Logo">
-
-            <button ><a href="index.php">Home</a></button>
 
         </header>
         <main class="cart">
@@ -25,16 +23,19 @@
 <?php 
 
 require_once './ssLib.php';
-require_once './classes/connection.php';
 
 $productID = cDeserialize();
 
 $unitPrice = [];
 $totalPrice = 0;
 
-$conn = connection::conn();
+$conn = ssDbConnect();
 
 $lenght = count($productID);
+
+echo '<pre>';
+print_r($productID);
+echo '</pre>';
 
 for($i = 0; $i <= $lenght -1; $i++)
 {
@@ -47,8 +48,6 @@ for($i = 0; $i <= $lenght -1; $i++)
 
     // set parameters and execute
     $ID = $productID[$i][0];
-
-    $ID = $productID[$i];
 
     $stmt->execute();
 
@@ -86,6 +85,7 @@ foreach($unitPrice as $fields => $values)
             </table>
             <button class="checkOut"><a href="memberorder.php">Checkout member</a></button>
             <button class="checkOut"><a href="newcustomerorder.php">Check out new customer</button>
+            <button class="shop"><a href="index.php">Home</a></button>
         </main>
         <?php include 'resource/footer.php'; ?>
 </body>
