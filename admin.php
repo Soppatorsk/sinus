@@ -14,7 +14,7 @@ if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
 }
 
-// Check if a form has been submitted
+// Check if a form has been submitted for updating a product
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Get the submitted form data
     $product_id = $_POST["ProductID"];
@@ -31,6 +31,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo "Product information updated successfully.";
     } else {
         echo "Error updating product information: " . mysqli_error($conn);
+    }
+}
+
+// Check if a form has been submitted for adding a new product
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["add_product"])) {
+    // Get the submitted form data
+    $product_id = $_POST["ProductID"];
+    $product_colour = $_POST["Colour"];
+    $product_size = $_POST["Size"];
+    $product_price = $_POST["Price"];
+    $product_category = $_POST["CategoryID"];
+
+    // Insert the new product information into the database
+    $sql = "INSERT INTO products (ProductID, Colour, Size, Price, CategoryID) VALUES ('$product_id', '$product_colour', '$product_size', '$product_price', '$product_category')";
+    $result = mysqli_query($conn, $sql);
+
+    if ($result) {
+        echo "New product added successfully.";
+    } else {
+        echo "Error adding new product: " . mysqli_error($conn);
     }
 }
 
@@ -56,11 +76,12 @@ mysqli_close($conn);
 
 <html>
 <head>
-    <title>Product Administration</title>
-    <a href="shop.php">Take me back to the shop!</a>
+    
 </head>
 <body>
     <h1>Product Administration</h1>
+    <a href="shop.php">Take me back to the shop!</a>
+    <h2>Update existing product</h2>
     <table>
         <tr>
             <th>ID</th>
@@ -84,5 +105,55 @@ mysqli_close($conn);
         </tr>
         <?php endforeach; ?>
     </table>
-</body>
-</html>
+
+    <h2>Add a new product</h2>
+    <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+        <table>
+            <tr>
+                <td><label for="new-product-id">Product ID:</label></td>
+                <td><input type="text" id="new-product-id" name="new_product_id" required></td>
+            </tr>
+            <tr>
+                <td><label for="new-colour">Colour:</label></td>
+                <td><input type="text" id="new-colour" name="new_colour" required></td>
+            </tr>
+            <tr>
+                <td><label for="new-size">Size:</label></td>
+                <td><input type="text" id="new-size" name="new_size" required></td>
+            </tr>
+            <tr>
+                <td><label for="new-price">Price:</label></td>
+                <td><input type="number" id="new-price" name="new_price" min="0" step="0.01" required></td>
+            </tr>
+            <tr>
+                <td><label for="new-category-id">Category ID:</label></td>
+                <td><input type="text" id="new-category-id" name="new_category_id" required></td>
+            </tr>
+            <tr>
+                <td colspan="2"><input type="submit" value="Add product"></td>
+            </tr>
+        </table>
+    </form>
+
+    <?php
+    // Check if a new product has been submitted
+    if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["new_product_id"]) && isset($_POST["new_colour"]) && isset($_POST["new_size"]) && isset($_POST["new_price"]) && isset($_POST["new_category_id"])) {
+        // Get the submitted form data
+        $new_product_id = $_POST["new_product_id"];
+        $new_colour = $_POST["new_colour"];
+        $new_size = $_POST["new_size"];
+        $new_price = $_POST["new_price"];
+        $new_category_id = $_POST["new_category_id"];
+
+        // Add the new product to the database
+        $sql = "INSERT INTO products (ProductID, Colour, Size, Price, CategoryID) VALUES ('$new_product_id', '$new_colour', '$new_size', '$new_price', '$new_category_id')";
+        $result = mysqli_query($conn, $sql);
+
+        if ($result) {
+            echo "New product added successfully.";
+        } else {
+            echo "Error adding new product: " . mysqli_error($conn);
+        }
+    }
+?>
+
