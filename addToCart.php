@@ -12,7 +12,7 @@ foreach ($t as $e) echo print_r($e)."<br>";
 
 echo $_GET['product'];
 echo $_GET['quantity'];
-
+header('Location: shop.php?msg=Added%20to%20cart!');
 
 
 ?>

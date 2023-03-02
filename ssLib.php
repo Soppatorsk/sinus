@@ -159,6 +159,7 @@ function presentHighlight($id) //TODO this is a mess
     $title = $p->getColour()." ".$catName;
     $desc = $cat['Description']." (".$p->getSize().")";
     $price = $p->getPrice();
+    $msg = isset($_GET['msg']) ? $_GET['msg'] : "";
     
     $imgs = getProductImage($id);
     if (count($imgs) > 1) {
@@ -183,6 +184,7 @@ function presentHighlight($id) //TODO this is a mess
                 <input type="number" name="quantity" id="" value="1" min="1" max="99">
                     <input type="submit" value="Place in cart">
                 </form>
+                $msg
             </div>
         </div>
         EOT;
