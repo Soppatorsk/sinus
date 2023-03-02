@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 02, 2023 at 12:44 PM
+-- Generation Time: Mar 02, 2023 at 01:51 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -20,9 +20,45 @@ SET time_zone = "+00:00";
 --
 -- Database: `sinus_skate`
 --
-
 CREATE DATABASE IF NOT EXISTS `sinus_skate` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 USE `sinus_skate`;
+
+DELIMITER $$
+--
+-- Procedures
+--
+DROP PROCEDURE IF EXISTS `SP_MakeOrder`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_MakeOrder` (IN `in_Email` VARCHAR(100), OUT `out_OrderID` INT)   BEGIN
+
+DECLARE _customerID INT;
+
+SELECT CustomerID INTO _customerID FROM customers
+WHERE Email = in_Email;
+
+INSERT INTO orders (CustomerID)
+VALUES (_customerID);
+
+SELECT LAST_INSERT_ID() INTO out_OrderID ;
+
+END$$
+
+DROP PROCEDURE IF EXISTS `SP_PlaceOrder`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_PlaceOrder` (IN `_OrderID` INT, IN `_ProductID` INT, IN `_Qty` INT)   BEGIN
+
+DECLARE _price INT;
+DECLARE totalPrice INT;
+
+SELECT Price INTO @_price FROM products
+WHERE ProductID = _ProductID;
+
+SET @totalPrice = @_price * _Qty;
+
+INSERT INTO orderdetails (OrderID, ProductID, Price, Qty, TotalPrice)
+VALUES (_OrderID, _ProductID, @_price, _Qty, @totalPrice);
+
+END$$
+
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -30,6 +66,7 @@ USE `sinus_skate`;
 -- Table structure for table `category`
 --
 
+DROP TABLE IF EXISTS `category`;
 CREATE TABLE `category` (
   `CategoryID` int(11) NOT NULL,
   `Name` varchar(20) NOT NULL,
@@ -53,6 +90,7 @@ INSERT INTO `category` (`CategoryID`, `Name`, `Description`) VALUES
 -- Table structure for table `customers`
 --
 
+DROP TABLE IF EXISTS `customers`;
 CREATE TABLE `customers` (
   `CustomerID` int(11) NOT NULL,
   `FirstName` varchar(10) NOT NULL,
@@ -70,6 +108,7 @@ CREATE TABLE `customers` (
 -- Table structure for table `orderdetails`
 --
 
+DROP TABLE IF EXISTS `orderdetails`;
 CREATE TABLE `orderdetails` (
   `OrderID` int(11) NOT NULL,
   `ProductID` int(11) NOT NULL,
@@ -84,6 +123,7 @@ CREATE TABLE `orderdetails` (
 -- Table structure for table `orders`
 --
 
+DROP TABLE IF EXISTS `orders`;
 CREATE TABLE `orders` (
   `OrderID` int(11) NOT NULL,
   `CustomerID` int(11) NOT NULL COMMENT 'FK to CustomerID in customers',
@@ -96,6 +136,7 @@ CREATE TABLE `orders` (
 -- Table structure for table `productimages`
 --
 
+DROP TABLE IF EXISTS `productimages`;
 CREATE TABLE `productimages` (
   `id` int(11) DEFAULT NULL,
   `url` varchar(50) DEFAULT NULL
@@ -174,6 +215,7 @@ INSERT INTO `productimages` (`id`, `url`) VALUES
 -- Table structure for table `products`
 --
 
+DROP TABLE IF EXISTS `products`;
 CREATE TABLE `products` (
   `ProductID` int(11) NOT NULL,
   `CategoryID` int(11) NOT NULL COMMENT 'FK to catrgory on CategoryID',
