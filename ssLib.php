@@ -12,14 +12,17 @@ class Product
     public $colour;
     public $size;
     public $price;
+    public $description;
 
-    public function __construct($id, $category, $colour, $size, $price)
+
+    public function __construct($id, $category, $colour, $size, $price, $description)
     {
         $this->id = $id;
         $this->category = $category;
         $this->colour = $colour;
         $this->size = $size;
         $this->price = $price;
+        $this->description = $description;
     }
     public function getId()
     {
@@ -42,6 +45,12 @@ class Product
     {
         return $this->price;
     }
+
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
 }
 
 
@@ -60,12 +69,15 @@ function ssDbConnect()
         return $conn;
 }
 
-function queryToProducts($category, $size, $color) //TODO arguments to pass to query
+function queryToProducts($searchTerm, $category, $size, $color) //TODO arguments to pass to query
 
 {
     $out = array();
     $conn = ssDbConnect();
     $sql = "SELECT * FROM products WHERE 1 ";
+    if ($searchTerm != "") {
+        $sql .= "AND Description LIKE '%$searchTerm%' ";
+    }
     if ($category != "") {
         $sql .= "AND CategoryID='$category' ";
     }
@@ -82,7 +94,7 @@ function queryToProducts($category, $size, $color) //TODO arguments to pass to q
         // output data of each row
         while ($row = $result->fetch_assoc()) {
             #print_r($row['ProductID']);
-            $p = new Product($row['ProductID'], $row['CategoryID'], $row['Colour'], $row['Size'], $row['Price']);
+            $p = new Product($row['ProductID'], $row['CategoryID'], $row['Colour'], $row['Size'], $row['Price'], $row['Description']);
             array_push($out, $p);
         }
     } else {
@@ -102,7 +114,7 @@ function getProduct($id) //TODO unify database calls, multiple calls for same pr
     $result = $conn->query($sql);
     $result = $result->fetch_assoc();
     #var_dump(($result));
-    $p = new Product($result['ProductID'], $result['CategoryID'], $result['Colour'], $result['Size'], $result['Price']);
+    $p = new Product($result['ProductID'], $result['CategoryID'], $result['Colour'], $result['Size'], $result['Price'], $result['Description']);
     return $p;
 }
 
@@ -157,7 +169,8 @@ function presentHighlight($id) //TODO this is a mess
     $cat = getCategoryVerbose($p->getCategory());
     $catName = $cat['Name'];
     $title = $p->getColour()." ".$catName;
-    $desc = $cat['Description']." (".$p->getSize().")";
+    #$desc = $cat['Description']." (".$p->getSize().")";
+    $desc = $p->getDescription();
     $price = $p->getPrice();
     $msg = isset($_GET['msg']) ? $_GET['msg'] : "";
     
