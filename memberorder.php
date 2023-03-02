@@ -125,7 +125,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 {
     if (checkEmail($_SESSION['email']) == 0)
     {
-        echo 'Wrong Email input.';
+        echo 'Wrong Email input';
     }
     else
     {

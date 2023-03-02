@@ -4,7 +4,7 @@ require_once './classes/connection.php';
 include './resource/header.php';
 
 
-echo '<h2>Tack för din order.</h2>';
+echo '<h2>Tack för din order</h2>';
 
     include 'resource/footer.php';
 ?>

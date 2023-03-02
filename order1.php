@@ -209,7 +209,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
     
     if(checkEmail($_SESSION['email']) > 0 )
     {   
-        echo 'Email already exist.';    
+        echo 'Email already exist';    
     }
     else
     {
