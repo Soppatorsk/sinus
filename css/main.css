@@ -11,41 +11,6 @@ header img {
     max-height: 10vh;
 }
 
-#highlight {
-    display: flex;
-}
-
-#highlight img {
-    width:40vh;
-}
-
-#highlight .left {
-    float:left;
-    padding:0 15%;
-}
-
-#highlight .right {
-    float:right;
-}
-
-.boxes {
-    display: flex;
-    flex-wrap: wrap;
-}
-
-a {
-    text-decoration: none;
-    color:black;
-}
-
-.box {
-    margin:2vh;
-}
-
-.box img { 
-    height: 20vh;
-}
-
 span {
     display: none;
 }

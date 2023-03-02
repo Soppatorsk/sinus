@@ -202,9 +202,9 @@ INSERT INTO `productimages` (`id`, `url`) VALUES
 (50, 'sinus-skateboard-polar.png'),
 (51, 'sinus-skateboard-purple.png'),
 (52, 'sinus-skateboard-eagle.png'),
-(52, 'sinus-skateboard-fire.png'),
-(52, 'sinus-skateboard-yellow.png'),
-(52, 'sinus-skateboard-gretasfury.png'),
+(53, 'sinus-skateboard-fire.png'),
+(54, 'sinus-skateboard-yellow.png'),
+(55, 'sinus-skateboard-gretasfury.png'),
 (1, 'juholt.png'),
 (1, 'evilKermit.jpg'),
 (27, 'trumpRedCap.png');
