@@ -273,7 +273,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 
     $conn->close();
     }
-    setCookie("cart", serialize($arr), time() - 3600);
+    killCookie($arr);
     header('location: ./orderSent.php');
 
 }
