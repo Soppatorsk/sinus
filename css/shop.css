@@ -3,6 +3,12 @@ main {
     min-height: 60vh;
 }
 
+.controls {
+    display: flex;
+    justify-content: space-around;
+    margin: 0 0 2vh 0;
+}
+
 #highlight {
     display: flex;
     justify-content: space-around;
@@ -21,6 +27,12 @@ main {
 
 #highlight .right {
     float:right;
+    min-width:20vw;
+
+    background-color: #D0D0D0;
+    border-color: #D0D0D0;
+    border-style:solid;
+    border-radius: 10px;
 }
 
 .right * {
@@ -28,6 +40,7 @@ main {
 }
 
 .boxes {
+    margin:auto;
     display: flex;
     flex-wrap: wrap;
 }
@@ -42,7 +55,8 @@ a {
 }
 
 .box img { 
-    height: 20vh;
+    max-height: 20vh;
+    max-width: 10vw;
 }
 
 span {

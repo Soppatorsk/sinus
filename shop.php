@@ -2,12 +2,11 @@
 include 'ssLib.php';
 
 session_start();
-//TODO this is a big mess
 if (isset($_POST['new'])) { //Search press
-    if (isset($_POST['search'])) $st = $_POST['search']; else $st = ""; //TODO ? operands
-    if (isset($_POST['category'])) $ca = $_POST['category']; else $ca = ""; //TODO ? operands
-    if (isset($_POST['size'])) $s = $_POST['size']; else $s=""; 
-    if (isset($_POST['color'])) $co = $_POST['color']; else $co="";
+    $st = isset($_POST['search']) ? $_POST['search'] : "";
+    $ca = isset($_POST['category']) ? $_POST['category'] : "";
+    $s = isset($_POST['size']) ? $_POST['size'] : "";
+    $co = isset($_POST['color']) ? $_POST['color'] : "";
 
     $products = queryToProducts($st, $ca, $s, $co);
     if (!$products) { //if No results
@@ -26,7 +25,6 @@ if (isset($_POST['new'])) { //Search press
         $_SESSION['Filter'] = array("", "1", "", "");
         $products = queryToProducts("", "1", "", "");
         $highlight=$products[0]->getId();
-
     }
 }
 
@@ -48,7 +46,7 @@ $slider = getProductImage($highlight);
         <div class=controls>
             <form action="shop.php" method="post">
                 <input type="text" name="search">
-                <select name="category" id=""> <!-- TODO hide on non clothing -->
+                <select name="category" id=""> 
                     <option value="">All</option>
                     <option value="1">Hoodies</option>
                     <option value="2">Caps</option>

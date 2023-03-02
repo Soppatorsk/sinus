@@ -69,7 +69,7 @@ function ssDbConnect()
         return $conn;
 }
 
-function queryToProducts($searchTerm, $category, $size, $color) //TODO arguments to pass to query
+function queryToProducts($searchTerm, $category, $size, $color)
 
 {
     $out = array();
@@ -142,7 +142,7 @@ function present($array)
         $price = $p->getPrice();
 
         $imgPath = "resource/products/" . getProductImage($id)[0];
-        $cat = getCategoryVerbose($p->getCategory()); //TODO ass array bad EOT
+        $cat = getCategoryVerbose($p->getCategory());
         $desc = $cat['Description'];
         $title = $col . " " . $cat['Name'];
 
@@ -162,7 +162,7 @@ function present($array)
     }
 }
 
-function presentHighlight($id) //TODO this is a mess
+function presentHighlight($id) 
 { //show selected item
     $p = getProduct($id);
     $c = $p->getCategory();
@@ -214,7 +214,7 @@ function getCategoryVerbose($category)
 }
 
 function addToCart($id, $q)
-{ //TODO make objects instead?
+{ 
     $arr = cDeserialize();
     $new = array($id, $q);
     $found = false;
