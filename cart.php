@@ -6,7 +6,9 @@
     <body>
         <header Class="cartHeader">
             <img src="resource/logo/header-logo.png" alt="Sinus Logo">
+
             <button ><a href="index.php">Home</a></button>
+
         </header>
         <main class="cart">
             <h2>Shoppingcart</h2>
@@ -21,6 +23,7 @@
                 <th>Price</th>
             </tr>
 <?php 
+
 require_once './ssLib.php';
 require_once './classes/connection.php';
 
@@ -44,6 +47,9 @@ for($i = 0; $i <= $lenght -1; $i++)
 
     // set parameters and execute
     $ID = $productID[$i][0];
+
+    $ID = $productID[$i];
+
     $stmt->execute();
 
     $result = $stmt->get_result();
@@ -63,9 +69,11 @@ for($i = 0; $i <= $lenght -1; $i++)
         </tr>";
         $unitPrice[] = ($row['Price'] * $productID[$i][1]);
         }
-    
+
     }
+    
 }
+
 
 foreach($unitPrice as $fields => $values)
 {
