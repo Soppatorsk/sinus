@@ -6,7 +6,10 @@
     <body>
         <header Class="cartHeader">
             <img src="resource/logo/header-logo.png" alt="Sinus Logo">
+<<<<<<< Updated upstream
             <button ><a href="index.php">Home</a></button>
+=======
+>>>>>>> Stashed changes
         </header>
         <main class="cart">
             <h2>Shoppingcart</h2>
@@ -21,11 +24,18 @@
                 <th>Price</th>
             </tr>
 <?php 
+<<<<<<< Updated upstream
 require_once './ssLib.php';
 require_once './classes/connection.php';
 
 $productID = cDeserialize();
 
+=======
+require_once 'classes/connection.php';
+
+$productID = [7, 5, 20];
+$qty = [1, 1, 2];
+>>>>>>> Stashed changes
 $uniPprice = [];
 $totalPrice = 0;
 
@@ -43,7 +53,11 @@ for($i = 0; $i <= $lenght -1; $i++)
     $stmt->bind_param("i", $ID);
 
     // set parameters and execute
+<<<<<<< Updated upstream
     $ID = $productID[$i][0];
+=======
+    $ID = $productID[$i];
+>>>>>>> Stashed changes
     $stmt->execute();
 
     $result = $stmt->get_result();
@@ -58,10 +72,17 @@ for($i = 0; $i <= $lenght -1; $i++)
         <td>" . $row['Size'] . "</td>
         <td>" . $row['Colour'] . "</td>
         <td>" . $row['Price'] . "</td>
+<<<<<<< Updated upstream
         <td>" . $productID[$i][1] . "</td>
         <td>" . ($row['Price'] * $productID[$i][1]). "</td>
         </tr>";
         $unitPrice[] = ($row['Price'] * $productID[$i][1]);
+=======
+        <td>" . $qty[$i] . "</td>
+        <td>" . ($row['Price'] * $qty[$i]). "</td>
+        </tr>";
+        $unitPrice[] = $row['Price'];
+>>>>>>> Stashed changes
         }
     
     }

@@ -9,6 +9,7 @@
         </header>
         <main class="cart">
 
+<<<<<<< Updated upstream
     <form class="customer" method="post" action="<?php echo $_SERVER["PHP_SELF"];?>">
     <label for="fname">First name:</label><br>
     <input class="adress" type="text" id="fname" name="fname" required><br>
@@ -33,6 +34,26 @@ if(!isset($_POST['fname']))
 }
 else
 {
+=======
+    <form method="post" action="<?php echo $_SERVER["PHP_SELF"];?>">
+    <label for="fname">First name:</label><br>
+    <input type="text" id="fname" name="fname"><br>
+    <label for="lname">Last name:</label><br>
+    <input type="text" id="lname" name="lname"><br><br>
+    <label for="lname">City:</label><br>
+    <input type="text" id="city" name="city"><br><br>
+    <label for="lname">Street:</label><br>
+    <input type="text" id="street" name="street"><br><br>
+    <label for="lname">Zip code:</label><br>
+    <input type="text" id="zipCode" name="zipCode"><br><br>
+    <label for="lname">Country:</label><br>
+    <input type="text" id="country" name="country"><br><br>
+    <label for="lname">Email:</label><br>
+    <input type="text" id="eMail" name="eMail"><br><br>
+    <input type="submit" value="Submit">
+</form> 
+<?php 
+>>>>>>> Stashed changes
 require_once 'classes/connection.php';
 $conn = connection::conn();
 
@@ -53,7 +74,11 @@ $conn = connection::conn();
     $stmt->execute();
 
     $result = $stmt->get_result();
+<<<<<<< Updated upstream
 }
+=======
+
+>>>>>>> Stashed changes
 
 
             ?>

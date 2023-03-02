@@ -8,10 +8,29 @@ header {
     padding-top:1vh;
 }
 
+<<<<<<< Updated upstream
 header img {
     max-height: 10vh;
 }
 
+=======
+main {
+    /*display: flex;
+    flex-wrap: wrap;*/
+    min-height: 70vh;
+}
+
+.box {
+    width: 30%;
+}
+
+.box img { 
+    margin:auto;
+    height: 20vh;
+}
+
+
+>>>>>>> Stashed changes
 footer {
     display: flex;
     justify-content: space-between;
@@ -117,6 +136,7 @@ button.checkOut
     height: 3vw;
 }
 
+<<<<<<< Updated upstream
 label
 {
     background-color: aqua;
@@ -131,3 +151,5 @@ label
 {
     gap: 2;
 }
+=======
+>>>>>>> Stashed changes
