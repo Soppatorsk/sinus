@@ -40,24 +40,6 @@ if ($result) {
     echo "Error retrieving orders: " . mysqli_error($conn);
 }
 
-// Close the database connection
-mysqli_close($conn);
-?>
-<?php
-// Define MySQL database credentials
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "sinus_skate";
-
-// Create MySQL connection
-$conn = mysqli_connect($servername, $username, $password, $dbname);
-
-// Check if the connection was successful
-if (!$conn) {
-    die("Connection failed: " . mysqli_connect_error());
-}
-
 // Initialize the customer ID variable
 $customer_id = "";
 
@@ -103,9 +85,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["customer_id"])) {
 // Close the database connection
 mysqli_close($conn);
 ?>
-
-<html>
-<head>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/dark.css">  
 </head>
 <body>
