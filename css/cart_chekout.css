@@ -142,7 +142,16 @@ td
 color: black;
 }
 
-button.checkOut
+button.checkOut 
+{
+    background-color: aquamarine;
+    color: blueviolet;
+    justify-self: flex-start;
+    width: 7vw;
+    height: 3vw;
+}
+
+button.shop
 {
     background-color: aquamarine;
     color: blueviolet;
