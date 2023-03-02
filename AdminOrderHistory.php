@@ -1,17 +1,8 @@
 <?php
-// Define MySQL database credentials
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "sinus_skate";
+require_once './ssLib.php';
+//Log in to the database built in check incase connection fails.
+$conn = ssDbConnect();
 
-// Create MySQL connection
-$conn = mysqli_connect($servername, $username, $password, $dbname);
-
-// Check if the connection was successful
-if (!$conn) {
-    die("Connection failed: " . mysqli_connect_error());
-}
 
 // Retrieve all orders from the database
 $sql = "SELECT * FROM orders";

@@ -1,18 +1,7 @@
 <?php
-
-// Define MySQL database credentials
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "sinus_skate";
-
-// Create MySQL connection
-$conn = mysqli_connect($servername, $username, $password, $dbname);
-
-// Check if the connection was successful
-if (!$conn) {
-    die("Connection failed: " . mysqli_connect_error());
-}
+require_once './ssLib.php';
+//Log in to the database built in check incase connection fails.
+$conn = ssDbConnect();
 
 // Check if a form has been submitted for updating a product
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
