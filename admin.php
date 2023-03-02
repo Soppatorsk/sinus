@@ -77,11 +77,13 @@ mysqli_close($conn);
 
 <html>
 <head>
-    
+ 
 </head>
 <body>
     <h1>Product Administration</h1>
     <a href="shop.php">Take me back to the shop!</a>
+    <br><br>
+    <a href="AdminOrderHistory.php">What are past and current orders?</a>
     <h2>Update existing product</h2>
     <table>
         <tr>
