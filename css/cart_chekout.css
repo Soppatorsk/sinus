@@ -1,0 +1,167 @@
+body {
+    background-color:#D9D9D9;
+    width: 80vw;
+    margin: auto;
+}
+header {
+    margin:auto;
+}
+
+header img {
+    max-height: 10vh;
+}
+
+#highlight {
+    display: flex;
+}
+
+#highlight img {
+    width:40vh;
+}
+
+#highlight .left {
+    float:left;
+    padding:0 15%;
+}
+
+#highlight .right {
+    float:right;
+}
+
+.boxes {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+a {
+    text-decoration: none;
+    color:black;
+}
+
+.box {
+    margin:2vh;
+}
+
+.box img { 
+    height: 20vh;
+}
+
+span {
+    display: none;
+}
+
+footer {
+    text-align: center;
+}
+
+footer div {
+    margin:0 8vw 0 0;
+}
+
+
+/* Erik har gjort detta */
+.cartHeader
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+}
+
+.cartHeader img
+{
+    height: 50%;
+    width: 50%;
+}
+
+.cart
+{
+    /*display: flex;*/
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+table
+{
+    /*display: flex;
+    flex-direction: column;*/
+    width: 64vw;
+    /*height: 50vh;*/
+}
+
+th, td 
+{
+    border:1px solid black;  
+}
+/* tr
+{
+    display: flex;
+    flex-direction: row;
+
+} */
+th
+{
+    height: 3vh;
+}
+
+td
+{
+    height: 5vh;
+}
+
+.cartProduct
+{
+    flex: 1;
+    justify-self: space-around;
+    align-self: center;
+}
+
+
+.quantity
+{
+    flex: 1;
+    justify-self: space-around;
+    align-self: center;
+}
+
+.price
+{
+    flex: 1;
+    justify-self: space-around;
+    align-self: center;
+}
+
+.delite
+{
+    flex: 1;
+    justify-self: space-around;
+    align-self: center;
+}
+
+.total
+{
+color: black;
+}
+
+button.checkOut
+{
+    background-color: aquamarine;
+    color: blueviolet;
+    justify-self: flex-start;
+    width: 7vw;
+    height: 3vw;
+}
+
+label
+{
+    background-color: aqua;
+}
+
+.adress
+{
+    margin: 2em;
+}
+
+.customer
+{
+    gap: 2;
+}

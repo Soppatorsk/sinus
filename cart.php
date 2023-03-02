@@ -1,7 +1,7 @@
 <html>
     <head>
         <Title>Sinus Skateshop</Title>
-        <link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" href="css/cart_chekout.css">
     </head>
     <body>
         <header Class="cartHeader">
