@@ -1,9 +1,17 @@
+<hr>
 <footer>
-    <h2 href="">Adress</h2>
-    <h2 href="">Admin </h2>
     <div>
-        <h2 href="">Medier</h2>
-        <br>    
+        <a href="admin.php">
+                <h2>Admin</h2>
+
+            </a>
+    </div>
+    <div>
+        <h2>Adress</h2>
+        <p>Kungliga slottet<br>107 70 Stockholm</p>
+    </div>
+    <div>
+        <h2>Medier</h2>
         <a href="">Facebook</a>
         <br>    
         <a href="">LinkedIn</a>

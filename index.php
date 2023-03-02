@@ -2,17 +2,16 @@
 
 ?>
 <html>
-
 <head>
     <Title>Sinus Skateshop</Title>
     <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/index.css">
 </head>
-
 <body>
     <?php include 'resource/header.php'; ?>
     <main>
         <div class="box">
-            <a href="shop.php?product=1">
+            <a href="shop.php">
                 <h2>Hoodies</h2>
                 <img src="resource/products/hoodie-ash.png" alt="">
             </a>
@@ -41,8 +40,6 @@
             <img src="resource/products/sinus-wheel-wave.png" alt="">
             </a>
         </div>
-
-
     </main>
     <?php include 'resource/footer.php'; ?>
 </body>
