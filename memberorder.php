@@ -108,13 +108,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 ?>
     <h2>Type in your information and click order to complet your purchase.</h2>
     <p><span class="error">* required field</span></p>
-    <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">  
+    <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>"> 
     
     E-mail: <input type="text" name="email" value="<?php echo $email;?>">
     <span class="error">* <?php echo $emailErr;?></span>
     <br><br>
 
-    <input type="submit" name="submit" value="Order">  
+    <input type="submit" name="submit" value="order">  
     </form>
 
 <?php
@@ -123,14 +123,25 @@ $_SESSION['email'] = $email;
 
 if ($_SERVER["REQUEST_METHOD"] == "POST")
 {
+    if (checkEmail($_SESSION['email']) == 0)
+    {
+        echo 'Wrong Email input';
+    }
+    else
+    {
     require_once 'classes/connection.php';
         
     $conn = connection::conn();
 
     $stmt = $conn->prepare("CALL SP_MakeOrder(?, @OrderID);");
-        $stmt->bind_param("s", $ordereMail);
+    $stmt->bind_param("s", $ordereMail);
+    
+    $ordereMail = $_SESSION['email'];
 
-        $ordereMail = $_SESSION['email'];
+        echo '<pre>';
+        print_r($_SESSION['email']);
+        echo '</pre>';
+
 
         $stmt->execute();
 
@@ -166,7 +177,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
         }
 
     $conn->close();
+    header('location: ./orderSent.php');
 }
+}
+
 
 include 'resource/footer.php';
 ?>

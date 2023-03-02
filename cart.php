@@ -76,7 +76,7 @@ foreach($unitPrice as $fields => $values)
                 <td class="total">Total <?= ' ' . $totalPrice?></td>
             </tr>
             </table>
-            <button ><a href="memberorder.php">Checkout member</a></button>;
+            <button ><a href="memberorder.php">Checkout member</a></button>
             <button class="checkOut"><a href="order1.php">Check out new customer</button>
         </main>
         <?php include 'resource/footer.php'; ?>
