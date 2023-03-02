@@ -16,10 +16,9 @@ span {
 }
 
 footer {
+    display: flex;
+    justify-content: space-around;
     text-align: center;
 }
 
-footer div {
-    margin:0 8vw 0 0;
-}
 
