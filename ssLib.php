@@ -146,6 +146,8 @@ function present($array)
         $desc = $cat['Description'];
         $title = $col . " " . $cat['Name'];
 
+        if ($_COOKIE['CUR'] == 'EUR') $price = toEUR($price)." EUR"; 
+        else $price = $price." SEK";
 
         echo <<<EOT
         <a href="?product=$id">
@@ -155,7 +157,7 @@ function present($array)
                 <img src="$imgPath">
                 <br>
                 <p></p>
-                <p>$price:-</p>
+                <p>$price</p>
                 </div>
         </a>
         EOT;
@@ -172,14 +174,16 @@ function presentHighlight($id)
     #$desc = $cat['Description']." (".$p->getSize().")";
     $desc = $p->getDescription();
     $price = $p->getPrice();
-    $msg = isset($_GET['msg']) ? $_GET['msg'] : "";
-    
+    $msg = isset($_GET['msg']) ? $_GET['msg'] : ""; 
     $imgs = getProductImage($id);
     if (count($imgs) > 1) {
             $imgView = "<div><img id=\"image1\"></div>";
     } else {
         $imgView = "<img src=\"resource/products/".$imgs[0]."\">";
     }
+        if ($_COOKIE['CUR'] == 'EUR') $price = toEUR($price)." EUR"; 
+        else $price = $price." SEK";
+
 
 
     echo <<<EOT
@@ -190,7 +194,7 @@ function presentHighlight($id)
                 <p>$desc</p>
             </div>
             <div class="right">
-                <p>$price SEK</p>
+                <p>$price</p>
                 <p>Add to cart:</p>
                 <form action="addToCart.php">
                 <input type="hidden" name="product" value="$id">
@@ -270,6 +274,36 @@ function checkEmail($eMail)
          }
     }
 
+}
+function getEURRate() {
+ $curl = curl_init();
+
+    curl_setopt_array($curl, array(
+      CURLOPT_URL => "https://api.apilayer.com/exchangerates_data/convert?to=EUR&from=SEK&amount=1",
+      CURLOPT_HTTPHEADER => array(
+        "Content-Type: text/plain",
+        "apikey: r2hVGYn5mbu0h55tRMTX2TfY5ZJwMdR6"
+      ),
+      CURLOPT_RETURNTRANSFER => true,
+      CURLOPT_ENCODING => "",
+      CURLOPT_MAXREDIRS => 10,
+      CURLOPT_TIMEOUT => 0,
+      CURLOPT_FOLLOWLOCATION => true,
+      CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+      CURLOPT_CUSTOMREQUEST => "GET"
+    ));
+    
+    $response = curl_exec($curl);
+    curl_close($curl);
+    $js = json_decode($response, true);
+    $rate = $js['info']['rate'];
+
+    return $rate;
+}
+    
+function toEUR($i) {
+    //TODO check
+   return round($i * $_COOKIE['EURORATE']);
 }
 
 function delete($id)

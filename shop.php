@@ -1,6 +1,7 @@
 <?php
 include 'ssLib.php';
-
+if (!isset($_COOKIE['EURORATE'])) setcookie("EURORATE", getEURRate(), time()+3600);
+if (isset($_POST['CUR'])) setcookie("CUR", $_POST['CUR'], time()+3600);
 session_start();
 if (isset($_POST['new'])) { //Search press
     $st = isset($_POST['search']) ? $_POST['search'] : "";
@@ -40,10 +41,10 @@ $slider = getProductImage($highlight);
     <link rel="stylesheet" href="css/shop.css">
     <script src="main.js"></script>
 </head>
-
 <body>
     <?php include 'resource/header.php'; ?>
     <main>
+        <?php #echo toEUR(999); ?>
         <div class=controls>
             <form action="shop.php" method="post">
                 <input type="text" name="search">
@@ -73,6 +74,13 @@ $slider = getProductImage($highlight);
                 <input type="hidden" name="new" value="true">
 <input type="submit" value="Search">
             </form>
+            <form action="shop.php" method="post">
+
+                <input type="hidden" name="new" value="true">
+                <input type="submit" name="CUR" value="EUR">
+                <input type="submit" name="CUR" value="SEK">
+            </form>
+ 
         </div>
         <?php
         if (!isset($_GET['err'])) {
