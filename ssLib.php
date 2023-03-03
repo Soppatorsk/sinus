@@ -272,4 +272,13 @@ function checkEmail($eMail)
 
 }
 
+function delete($id)
+{
+    $productID = cDeserialize();
+    unset($productID[$id]); 
+    $uppdated = array_values($productID); 
+    cSerialize($uppdated);
+    header("Refresh:0");
+}
+
 ?>

@@ -64,13 +64,13 @@ footer div {
 {
     display: flex;
     flex-direction: column;
-    justify-content: end;
+    align-items: center;
 }
 
 .cartHeader img
 {
-    height: 50%;
-    width: 50%;
+    /* height: 50%;
+    width: 50%; */
 }
 
 .cart
@@ -142,6 +142,13 @@ td
 color: black;
 }
 
+.buttons
+{
+    display: flex;
+    flex-direction: row;
+    gap: 1em;
+    
+}
 button.checkOut 
 {
     background-color: aquamarine;
