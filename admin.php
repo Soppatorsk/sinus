@@ -44,6 +44,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["new_colour"]) && isset
   } else {
       echo "Error adding new product: " . mysqli_error($conn);
   }
+  header("Refresh:0");
 }
 
 // Retrieve information about products

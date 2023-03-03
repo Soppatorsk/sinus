@@ -28,7 +28,8 @@ include 'resource/header.php';
 
         $unitPrice = [];
         $totalPrice = 0;
-
+        $cur = $_COOKIE['CUR'];
+        
         $conn = connection::conn();
 
         $lenght = count($productID);
@@ -48,7 +49,7 @@ include 'resource/header.php';
 
             $result = $stmt->get_result();
 
-            $cur = $_COOKIE['CUR'];
+           
             
             if ($result->num_rows > 0)
             {
