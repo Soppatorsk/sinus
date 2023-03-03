@@ -3,7 +3,7 @@
 <html>
 <head>
 <Title>Sinus Skateshop</Title>
-    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/cart_chekout.css">
 </head>
 <body>  
 <?php
@@ -48,18 +48,21 @@ include 'resource/header.php';
 
             $result = $stmt->get_result();
 
+            $cur = $_COOKIE['CUR'];
+            
             if ($result->num_rows > 0)
             {
                     
                 while ($row = $result->fetch_assoc()) 
                 {
+                ($_COOKIE['CUR'] == 'EUR' ? $price = toEUR($row['Price']) :  $price = $row['Price']);   
                 echo "<tr>
                 <td>" . $row['Name'] . "</td>
                 <td>" . $row['Size'] . "</td>
                 <td>" . $row['Colour'] . "</td>
-                <td>" . $row['Price'] . "</td>
+                <td>" . $price . $cur . "</td>
                 <td>" . $productID[$i][1] . "</td>
-                <td>" . ($row['Price'] * $productID[$i][1]). "</td>
+                <td>" . ($price * $productID[$i][1]). "</td>
                 </tr>";
                 $unitPrice[] = ($row['Price'] * $productID[$i][1]);
                 }
@@ -73,7 +76,7 @@ foreach($unitPrice as $fields => $values)
 }
             ?>
             <tr>
-                <td class="total">Total <?= ' ' . $totalPrice?></td>
+                <td class="total">Total <?= ' ' . $totalPrice . $cur?></td>
             </tr>
             </table>
             </main>

@@ -3,14 +3,14 @@
 <html>
 <head>
 <Title>Sinus Skateshop</Title>
-    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/cart_chekout.css">
 </head>
 <body>  
 <?php
 include 'resource/header.php';
 ?>
 <main class="cart">
-    <h2>Shoppingcart</h2>
+    <h2>Your order</h2>
         <table>
                     <tr>
                         <th>Product</th>
@@ -21,18 +21,19 @@ include 'resource/header.php';
                         <th>Price</th>
                     </tr>
         <?php 
-        require_once './ssLib.php';
-        require_once './classes/connection.php';
+        require_once './ssLib.php';;
 
-        $productID = cDeserialize();
+        $productID = cDeserialize();// gets the array for product and qty
 
-        $unitPrice = [];
-        $totalPrice = 0;
+        $unitPrice = []; // holds the individual price for the rows in the cart
+        $totalPrice = 0; // add the prices in the unitprice array to get the total price of the shoppingcart
 
-        $conn = connection::conn();
+        $conn = ssDbConnect();
 
         $lenght = count($productID);
 
+        $cur = $_COOKIE['CUR'];
+        
         for($i = 0; $i <= $lenght -1; $i++)
         {
             $stmt = $conn->prepare("SELECT P.ProductID, C.Name, P.Price, P.Size, P.Colour FROM products AS P
@@ -53,13 +54,14 @@ include 'resource/header.php';
                     
                 while ($row = $result->fetch_assoc()) 
                 {
+                ($_COOKIE['CUR'] == 'EUR' ? $price = toEUR($row['Price']) :  $price = $row['Price']);
                 echo "<tr>
                 <td>" . $row['Name'] . "</td>
                 <td>" . $row['Size'] . "</td>
                 <td>" . $row['Colour'] . "</td>
-                <td>" . $row['Price'] . "</td>
+                <td>" . $price . $cur . "</td>
                 <td>" . $productID[$i][1] . "</td>
-                <td>" . ($row['Price'] * $productID[$i][1]). "</td>
+                <td>" . ($price * $productID[$i][1]) . $cur . "</td>
                 </tr>";
                 $unitPrice[] = ($row['Price'] * $productID[$i][1]);
                 }
@@ -67,26 +69,29 @@ include 'resource/header.php';
             }
         }
 
+// takes teh values in the unitprice array, adds then together and putts them in totalPrice
 foreach($unitPrice as $fields => $values)
 {
     $totalPrice += $values;
 }
             ?>
             <tr>
-                <td class="total">Total <?= ' ' . $totalPrice?></td>
+                <td class="total">Total <?= ' ' . $totalPrice . $cur?></td>
             </tr>
             </table>
             </main>
 <?php
 
+
 session_start();
+
 // define variables and set to empty values
 $firstNameErr = $lastNameErr = $cityErr = $emailErr = $countryErr = $zipCodeErr = $streetErr = "";
 $firstName = $lastName = $city = $email = $country = $zipCode = $street = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") 
 {
-
+    // checks if the fields has been filld in
     if (empty($_POST["fname"])) 
     {
         $firstNameErr = "First name is required";
