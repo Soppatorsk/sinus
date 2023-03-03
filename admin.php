@@ -12,7 +12,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $product_price = isset($_POST["Price"]) ? $_POST["Price"] : "";
     $product_category = isset($_POST["CategoryID"]) ? $_POST["CategoryID"] : "";
     $product_description = isset($_POST["description"]) ? $_POST["description"] : "";
-
+    $product_img = isset($_POST["img"]) ? $_POST["img"] : "";
     // Update the product information in the database
     $sql = "UPDATE products SET Colour='$product_colour', Size='$product_size', Price='$product_price', CategoryID='$product_category', Description='$product_description' WHERE ProductID='$product_id'";
     $result = mysqli_query($conn, $sql);
@@ -22,6 +22,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         echo "Error updating product information: " . mysqli_error($conn);
     }
+
+    $sql = "UPDATE productimages SET url='$product_img' WHERE id='$product_id'";
+    $result = mysqli_query($conn, $sql);
+
 }
 
 // Check if a form has been submitted for adding a new product
@@ -53,7 +57,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["new_colour"]) && isset
     $sql = "INSERT INTO productImages VALUES ('$product_id', '$product_img')";
     $result = mysqli_query($conn, $sql);
 
-#    header("Refresh:0");
+   header("Refresh:0");
 }
 
 
@@ -74,8 +78,24 @@ if (mysqli_num_rows($result) > 0) {
     echo "No products found.";
 }
 
+// Retrieve information about productImages (main img)
+$sql = "SELECT * FROM productimages"; //TODO SQL magic DISTINCT statement?
+$result = mysqli_query($conn, $sql);
 
+if (mysqli_num_rows($result) > 0) {
+    // Create an array to store the products
+    $productImages = array();
 
+    // Fill in the products array with information from the database
+    $idsFilled = array();
+    while ($row = mysqli_fetch_assoc($result)) {
+        if (!in_array($row['id'], $idsFilled)) $productImages[] = $row;
+        array_push($idsFilled, $row['id']);
+    }
+    print_r($productImages);
+} else {
+    echo "No products found.";
+}
 
 // Close the database connection
 mysqli_close($conn);
@@ -114,6 +134,7 @@ mysqli_close($conn);
                     <td><input type="number" name="Price" value="<?php echo $product["Price"]; ?>"></td>
                     <td><input type="text" name="CategoryID" value="<?php echo $product["CategoryID"]; ?>"></td>
                     <td><input type="text" name="description" value="<?php echo $product["Description"]; ?>"></td>
+                    <td><input type="text" name="img" value="<?php  echo $productImages[$product["ProductID"]-1]['url']; ?>"></td>
                     <input type="hidden" name="ProductID" value="<?php echo $product["ProductID"]; ?>">
                     <td><input type="submit" value="Update"></td>
                 </form>
