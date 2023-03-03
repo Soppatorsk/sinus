@@ -136,5 +136,3 @@ mysqli_close($conn);
             </tr>
         </table>
     </form>
-
-
