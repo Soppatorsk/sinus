@@ -1,9 +1,11 @@
 <?php
 include 'ssLib.php';
 if (isset($_POST['Refresh'])) header('Refresh:0');
-if (!isset($_COOKIE['EURORATE'])) setcookie("EURORATE", getEURRate(), time()+3600);
-if (isset($_POST['CUR'])) setcookie("CUR", $_POST['CUR'], time()+3600);
+if (!isset($_COOKIE['EURORATE'])) setcookie("EURORATE", getEURRate(), time()+9999);
+if (!isset($_COOKIE['CUR'])) setcookie('CUR', 'SEK', time()+9999);
+
 session_start();
+
 if (isset($_POST['new'])) { //Search press
     $st = isset($_POST['search']) ? $_POST['search'] : "";
     $ca = isset($_POST['category']) ? $_POST['category'] : "";
