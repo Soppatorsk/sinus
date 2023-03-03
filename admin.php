@@ -26,9 +26,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
 // Check if a form has been submitted for adding a new product
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["new_product_id"]) && isset($_POST["new_colour"]) && isset($_POST["new_size"]) && isset($_POST["new_price"]) && isset($_POST["new_category_id"])) {
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["new_colour"]) && isset($_POST["new_size"]) && isset($_POST["new_price"]) && isset($_POST["new_category_id"])) {
   // Get the submitted form data
-  $product_id = $_POST["new_product_id"];
   $product_colour = $_POST["new_colour"];
   $product_size = $_POST["new_size"];
   $product_price = $_POST["new_price"];
@@ -37,7 +36,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["new_product_id"]) && i
   
 
   // Insert the new product information into the database
-  $sql = "INSERT INTO products (ProductID, Colour, Size, Price, CategoryID) VALUES ('$product_id', '$product_colour', '$product_size', '$product_price', '$product_category','$product_description')";
+  $sql = "INSERT INTO products (Colour, Size, Price, CategoryID, Description) VALUES ('$product_colour', '$product_size', '$product_price', '$product_category','$product_description')";
   $result = mysqli_query($conn, $sql);
 
   if ($result) {
@@ -107,10 +106,6 @@ mysqli_close($conn);
     <h2>Add a new product</h2>
     <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
         <table>
-            <tr>
-                <td><label for="new-product-id">Product ID:</label></td>
-                <td><input type="text" id="new-product-id" name="new_product_id" required></td>
-            </tr>
             <tr>
                 <td><label for="new-colour">Colour:</label></td>
                 <td><input type="text" id="new-colour" name="new_colour" required></td>

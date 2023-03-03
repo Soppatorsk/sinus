@@ -29,6 +29,7 @@ $productID = cDeserialize(); // gets the array for product and qty
 
 $unitPrice = []; // holds the individual price for the rows in the cart
 $totalPrice = 0; // add the prices in the unitprice array to get the total price of the shoppingcart
+$cur = $_COOKIE['CUR'];
 
 $conn = ssDbConnect();
 
@@ -57,14 +58,13 @@ $stmt->execute();
 
 $result = $stmt->get_result();
 
-$cur = $_COOKIE['CUR'];
 
 if ($result->num_rows > 0)
 {
     
     while ($row = $result->fetch_assoc()) 
-    {if 
-        ($_COOKIE['CUR'] == 'EUR' ? $price = toEUR($row['Price']) :  $price = $row['Price'])
+    {
+        if($_COOKIE['CUR'] == 'EUR' ? $price = toEUR($row['Price']) :  $price = $row['Price'])
         
         echo "<tr>
         <td>" . $row['Name'] . "</td>
@@ -96,7 +96,7 @@ foreach($unitPrice as $fields => $values)
 
             ?>
             <tr>
-                <td class="total">Total <?= ' ' . $totalPrice . $cur?></td>
+                <td class="total">Total <?= ' ' . $totalPrice . ' ' . $cur?></td>
             </tr>
             </table>
         <div class="buttons">
