@@ -35,6 +35,7 @@ $slider = getProductImage($highlight);
 <html>
 <head>
     <Title>Sinus Skateshop</Title>
+    
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/shop.css">
     <script src="main.js"></script>
