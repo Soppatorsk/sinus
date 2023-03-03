@@ -114,25 +114,36 @@ color: black;
 }
 button.checkOut 
 {
-    background-color: aquamarine;
-    color: blueviolet;
+    background-color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
     justify-self: flex-start;
+    text-decoration: none;
     width: 7vw;
     height: 3vw;
 }
 
 button.shop
 {
-    background-color: aquamarine;
-    color: blueviolet;
+    background-color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
     justify-self: flex-start;
     width: 7vw;
     height: 3vw;
 }
 
+a
+{
+    text-decoration: none;
+    text-decoration-color: black;
+}
+a:visited
+{
+    color: black;
+}
+
 label
 {
-    background-color: aqua;
+    background-color: rgb(0, 0, 0);
 }
 
 .adress
