@@ -1,5 +1,6 @@
 <?php
 include 'ssLib.php';
+if (isset($_POST['Refresh'])) header('Refresh:0');
 if (!isset($_COOKIE['EURORATE'])) setcookie("EURORATE", getEURRate(), time()+3600);
 if (isset($_POST['CUR'])) setcookie("CUR", $_POST['CUR'], time()+3600);
 session_start();
@@ -36,7 +37,6 @@ $slider = getProductImage($highlight);
 <html>
 <head>
     <Title>Sinus Skateshop</Title>
-    
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/shop.css">
     <script src="main.js"></script>
@@ -75,8 +75,7 @@ $slider = getProductImage($highlight);
 <input type="submit" value="Search">
             </form>
             <form action="shop.php" method="post">
-
-                <input type="hidden" name="new" value="true">
+                <input type="hidden" name="Refresh" value="true">
                 <input type="submit" name="CUR" value="EUR">
                 <input type="submit" name="CUR" value="SEK">
             </form>
