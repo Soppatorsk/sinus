@@ -6,7 +6,7 @@
     </head>
     <body>
         <header Class="cartHeader">
-            <img src="resource/bak/sinus-logo-landscape - large.png" alt="Sinus Logo">
+            <img src="resource/logo/header-logo.png" alt="Sinus Logo">
 
         </header>
         <main class="cart">
