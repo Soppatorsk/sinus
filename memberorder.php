@@ -24,12 +24,12 @@ include 'resource/header.php';
         require_once './ssLib.php';
         require_once './classes/connection.php';
 
-        $productID = cDeserialize();
+        $productID = cDeserialize(); // gets the array for product and qty
 
         $unitPrice = [];
         $totalPrice = 0;
         $cur = $_COOKIE['CUR'];
-        
+
         $conn = connection::conn();
 
         $lenght = count($productID);
@@ -110,6 +110,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
         return $data;
     }
 ?>
+<?php // form for inputing an email of an existing customer?>
     <h2>Type in your E-Mail and click order to complet your purchase.</h2>
     <p><span class="error">* required field</span></p>
     <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>"> 
@@ -165,7 +166,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
             echo "0 results";
         }
 
-        $productID = cDeserialize();
+        $productID = cDeserialize(); // gets the array for product and qty
         $lenght = count($productID);
 
         for($i = 0; $i < $lenght ; $i++)
@@ -181,6 +182,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
         }
 
     $conn->close();
+
+    // kills the cookie after order is confirmed
     killCookie($arr);
     header('location: ./orderSent.php');
 }

@@ -171,6 +171,7 @@ function test_input($data) {
 }
 ?>
 
+<?php // form for input of shipping data and eMail?> 
 <h2>Type in your information and click order to complet your purchase.</h2>
 <p><span class="error">* required field</span></p>
 <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">  
@@ -237,7 +238,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
         
         $stmt->execute();
 
-
+        // query to a stored procedure that creates an order
         $stmt = $conn->prepare("CALL SP_MakeOrder(?, @OrderID);");
         $stmt->bind_param("s", $ordereMail);
 
@@ -261,9 +262,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
             echo "0 results";
         }
 
-        $productID = cDeserialize();
+        $productID = cDeserialize(); // gets the array for product and qty
         $lenght = count($productID);
 
+        // fills in the order details via a stored procedure
         for($i = 0; $i < $lenght ; $i++)
         {
             $stmt = $conn->prepare("CALL SP_PlaceOrder(?, ?, ?);");
@@ -278,6 +280,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 
     $conn->close();
     }
+
+    // kills the cookie after order is confirmed
     killCookie($arr);
     header('location: ./orderSent.php');
 

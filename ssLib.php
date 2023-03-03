@@ -251,7 +251,7 @@ function killCookie($arr)
 setCookie("cart", serialize($arr), time() - 3600);
 }
 
-function checkEmail($eMail)
+function checkEmail($eMail) // checks if the email exist or not
 {
 
     $conn = ssDbConnect();
@@ -306,13 +306,13 @@ function toEUR($i) {
    return round($i * $_COOKIE['EURORATE']);
 }
 
-function delete($id)
+function delete($id) //to delete a row in the cart
 {
-    $productID = cDeserialize();
-    unset($productID[$id]); 
-    $uppdated = array_values($productID); 
-    cSerialize($uppdated);
-    header("Refresh:0");
+    $productID = cDeserialize(); //gets the array of the chosen products and the qty
+    unset($productID[$id]); // removes det element for the chosen row
+    $uppdated = array_values($productID); // moves the elemens in the array to the right new spots
+    cSerialize($uppdated); // sends the uppdated array back to the cart 
+    header("Refresh:0"); // refresh the cart site after array is uppdated
 }
 
 ?>
