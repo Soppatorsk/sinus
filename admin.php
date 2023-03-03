@@ -92,7 +92,7 @@ if (mysqli_num_rows($result) > 0) {
         if (!in_array($row['id'], $idsFilled)) $productImages[] = $row;
         array_push($idsFilled, $row['id']);
     }
-    print_r($productImages);
+    //print_r($productImages);
 } else {
     echo "No products found.";
 }
