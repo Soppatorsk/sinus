@@ -10,7 +10,7 @@
 include 'resource/header.php';
 ?>
 <main class="cart">
-    <h2>Shoppingcart</h2>
+    <h2>Your order</h2>
         <table>
                     <tr>
                         <th>Product</th>
@@ -109,7 +109,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
         return $data;
     }
 ?>
-    <h2>Type in your information and click order to complet your purchase.</h2>
+    <h2>Type in your E-Mail and click order to complet your purchase.</h2>
     <p><span class="error">* required field</span></p>
     <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>"> 
     
