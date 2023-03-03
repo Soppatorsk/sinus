@@ -3,6 +3,7 @@ include 'ssLib.php';
 if (isset($_POST['Refresh'])) header('Refresh:0');
 if (!isset($_COOKIE['EURORATE'])) setcookie("EURORATE", getEURRate(), time()+9999);
 if (!isset($_COOKIE['CUR'])) setcookie('CUR', 'SEK', time()+9999);
+if (isset($_POST['CUR'])) setcookie("CUR", $_POST['CUR'], time()+3600);
 
 session_start();
 
